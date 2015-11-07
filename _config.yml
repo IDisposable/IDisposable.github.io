@@ -1,0 +1,8 @@
+excerpt_separator: ""
+pygments: true
+markdown: kramdown
+url: http://IDisposable.github.io
+title: Marc Brooks
+tagline: A log of everyday life
+description: Some ramblings
+paginate: 10
