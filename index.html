@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Marc Brooks (IDisposable) — systems engineer working across Jellyfin, JetKVM, the .NET runtime, and Go. Maintainer of dom-to-image-more.">
 <meta name="color-scheme" content="dark light">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%94%8C%3C/text%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="favicon.png">
 <meta property="og:title" content="Marc Brooks — Systems Engineer">
 <meta property="og:description" content="Fixes things at the protocol layer: Jellyfin, JetKVM firmware, the .NET runtime, zerolog, and a JS library installed 972,000 times a month.">
 <meta property="og:type" content="website">
@@ -512,6 +512,77 @@ footer .links {
   flex-wrap: wrap;
 }
 
+/* ---------- portrait ---------- */
+
+.hero-body {
+  display: flex;
+  align-items: flex-start;
+  gap: 1.8rem;
+}
+
+.hero-text {
+  flex: 1;
+  min-width: 0;
+}
+
+.hero-portrait {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+}
+
+.hero-portrait img.avatar {
+  display: block;
+  width: 128px;
+  height: 128px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: #efece3;
+  object-fit: cover;
+  transition: border-color 0.2s ease;
+}
+
+.hero-portrait:hover img.avatar {
+  border-color: var(--accent);
+}
+
+.portrait-caption {
+  font-family: "Plex Mono", monospace;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--text-faint);
+  text-align: center;
+  white-space: nowrap;
+}
+
+.gear-badge {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  vertical-align: -5px;
+  margin-left: 0.4rem;
+  opacity: 0.8;
+  transition: transform 0.5s ease;
+  display: inline-block;
+}
+
+.hero-top:hover .gear-badge {
+  transform: rotate(50deg);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .gear-badge { transition: none; }
+}
+
+@media (max-width: 640px) {
+  .hero-body { flex-direction: column; align-items: center; text-align: center; }
+  .hero-text { width: 100%; text-align: left; }
+}
+
 @media (max-width: 520px) {
   .wrap { padding: 3rem 1.1rem 2.5rem; }
   .hero { padding: 1.6rem 1.3rem 1.8rem; }
@@ -528,18 +599,27 @@ footer .links {
     <div class="hero-top">
       <span class="status-dot"></span>
       <span>github.com/IDisposable</span>
+      <img class="gear-badge" src="gear.png" alt="" aria-hidden="true">
     </div>
-    <h1 class="name">Marc Brooks</h1>
-    <p class="role">Director of IT &amp; Software Engineering Lead — 1904labs / Turnberry Labs</p>
-    <p class="thesis">Fixes things at the protocol layer: a path-traversal hole in a 57k-star media
-    server, USB gadget recovery in remote-KVM firmware, allocation behavior in a logging
-    library, sort order in the .NET runtime's JSON serializer. Maintains a JS library
-    installed <strong>972,000 times a month</strong>.</p>
-    <div class="hero-meta">
-      <span>Eureka, MO — St. Louis metro</span>
-      <a href="https://github.com/IDisposable">github.com/IDisposable</a>
-      <a href="mailto:idisposable@gmail.com">idisposable@gmail.com</a>
-      <a href="http://about.me/IDisposable">about.me/IDisposable</a>
+    <div class="hero-body">
+      <div class="hero-portrait">
+        <img class="avatar" src="avatar.png" alt="Vitruvian-style pencil illustration of Klaymen, from The Neverhood">
+        <span class="portrait-caption">Klaymen — MK1</span>
+      </div>
+      <div class="hero-text">
+        <h1 class="name">Marc Brooks</h1>
+        <p class="role">Director of IT &amp; Software Engineering Lead — 1904labs / Turnberry Labs</p>
+        <p class="thesis">Fixes things at the protocol layer: a path-traversal hole in a 57k-star media
+        server, USB gadget recovery in remote-KVM firmware, allocation behavior in a logging
+        library, sort order in the .NET runtime's JSON serializer. Maintains a JS library
+        installed <strong>972,000 times a month</strong>.</p>
+        <div class="hero-meta">
+          <span>Eureka, MO — St. Louis metro</span>
+          <a href="https://github.com/IDisposable">github.com/IDisposable</a>
+          <a href="mailto:idisposable@gmail.com">idisposable@gmail.com</a>
+          <a href="http://about.me/IDisposable">about.me/IDisposable</a>
+        </div>
+      </div>
     </div>
   </header>
 
