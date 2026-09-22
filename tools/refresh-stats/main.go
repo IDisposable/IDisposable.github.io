@@ -281,6 +281,19 @@ func setStatN(html, label string, value int) (string, error) {
 	return re.ReplaceAllString(html, repl), nil
 }
 
+// setStatHref rewrites the href of a stat-grid link, identified by its
+// label span, to point at newHref (a GitHub UI query matching the same
+// rolling window the number itself was computed from).
+func setStatHref(html, label, newHref string) (string, error) {
+	re := regexp.MustCompile(`(<a class="stat" href=")[^"]*("[^>]*><span class="n">\d+</span><span class="l">` +
+		regexp.QuoteMeta(label) + `</span></a>)`)
+	if !re.MatchString(html) {
+		return html, fmt.Errorf("stat link not found: %s", label)
+	}
+	esc := strings.ReplaceAll(newHref, "&", "&amp;")
+	return re.ReplaceAllString(html, "${1}"+esc+"${2}"), nil
+}
+
 func href(r repoRef) string {
 	return fmt.Sprintf(`href="https://github.com/%s/%s"`, r.owner, r.repo)
 }
@@ -399,6 +412,19 @@ func main() {
 	}
 
 	since := time.Now().UTC().AddDate(-1, 0, 0).Format("2006-01-02")
+
+	commitsHref := "https://github.com/search?q=" +
+		url.QueryEscape(fmt.Sprintf("author:%s author-date:>=%s", ghLogin, since)) + "&type=commits"
+	apply("commits stat link", func(h string) (string, error) { return setStatHref(h, "Commits", commitsHref) })
+
+	mergedHref := "https://github.com/search?q=" +
+		url.QueryEscape(fmt.Sprintf("is:pr is:merged author:%s merged:>=%s", ghLogin, since)) + "&type=pullrequests"
+	apply("PRs merged stat link", func(h string) (string, error) { return setStatHref(h, "PRs merged", mergedHref) })
+
+	reviewsHref := "https://github.com/search?q=" +
+		url.QueryEscape(fmt.Sprintf("is:pr reviewed-by:%s updated:>=%s", ghLogin, since)) + "&type=pullrequests"
+	apply("reviews given stat link", func(h string) (string, error) { return setStatHref(h, "Reviews given", reviewsHref) })
+
 	if merged12mo, err := searchCount(fmt.Sprintf("is:pr is:merged author:%s merged:>=%s", ghLogin, since)); err != nil {
 		log.Printf("PRs merged (12mo): %v", err)
 	} else {

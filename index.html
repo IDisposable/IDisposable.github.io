@@ -267,7 +267,12 @@ section {
 .stat {
   background: var(--bg-card);
   padding: 1.1rem 1rem;
+  display: block;
+  text-decoration: none;
+  color: inherit;
 }
+
+.stat:hover .n { color: var(--accent-strong); }
 
 .stat .n {
   font-family: "Plex Mono", monospace;
@@ -626,12 +631,12 @@ footer .links {
   <section id="stats">
     <p class="prompt"><span class="cmd">~$ git log --author=IDisposable --since="1 year ago" --stat</span></p>
     <div class="stat-grid">
-      <div class="stat"><span class="n">794</span><span class="l">Commits</span></div>
-      <div class="stat"><span class="n">77</span><span class="l">PRs merged</span></div>
-      <div class="stat"><span class="n">325</span><span class="l">Reviews given</span></div>
-      <div class="stat"><span class="n">41</span><span class="l">Repos touched</span></div>
-      <div class="stat"><span class="n">146</span><span class="l">Public repos</span></div>
-      <div class="stat"><span class="n">59</span><span class="l">Followers</span></div>
+      <a class="stat" href="https://github.com/search?q=author%3AIDisposable+author-date%3A%3E%3D2025-09-22&amp;type=commits"><span class="n">794</span><span class="l">Commits</span></a>
+      <a class="stat" href="https://github.com/search?q=is%3Apr+is%3Amerged+author%3AIDisposable+merged%3A%3E%3D2025-09-22&amp;type=pullrequests"><span class="n">76</span><span class="l">PRs merged</span></a>
+      <a class="stat" href="https://github.com/search?q=is%3Apr+reviewed-by%3AIDisposable+updated%3A%3E%3D2025-09-22&amp;type=pullrequests"><span class="n">325</span><span class="l">Reviews given</span></a>
+      <a class="stat" href="https://github.com/IDisposable?tab=overview"><span class="n">41</span><span class="l">Repos touched</span></a>
+      <a class="stat" href="https://github.com/IDisposable?tab=repositories"><span class="n">146</span><span class="l">Public repos</span></a>
+      <a class="stat" href="https://github.com/IDisposable?tab=followers"><span class="n">59</span><span class="l">Followers</span></a>
     </div>
     <p class="stat-note">Trailing twelve months, public activity only.</p>
   </section>
